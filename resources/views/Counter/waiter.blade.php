@@ -27,7 +27,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Table ID (updateTableNo)</th>
+                            <th>Table No</th>
                             <th>UserName</th>
                             <th>Password</th>
                             <th>Action</th>
@@ -38,7 +38,7 @@
                         <tr>
                             <td>{{$list->id}}</td>
                             <td>{{$list->name}}</td>
-                            <td>{{$list->table_id}}</td>
+                            <td>{{$list->table_no}}</td>
                             <td>{{$list->username}}</td>
                             <td>{{$list->password}}</td>
                             <td>

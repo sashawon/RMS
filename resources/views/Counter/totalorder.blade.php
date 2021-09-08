@@ -25,7 +25,7 @@
                 <table class="table table-borderless table-striped table-data3">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>No</th>
                             <th>Token</th>
                             <th>Table No</th>
                             <th>Order Time</th>

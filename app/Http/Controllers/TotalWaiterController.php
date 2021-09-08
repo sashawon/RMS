@@ -10,11 +10,7 @@ class TotalWaiterController extends Controller
 {
     public function index()
     {
-        $result['data'] = TotalWaiter::all();
-
-        // DB::table('total_waiters')
-        //                 ->leftjoin('total_tables','total_waiters.table_id','total_tables.id')
-        //                 ->get();
+        $result['data'] = TotalWaiter::leftjoin('total_tables','total_waiters.table_id','total_tables.id')->select('total_waiters.id', 'total_waiters.name', 'total_waiters.table_id', 'total_waiters.username', 'total_waiters.password', 'total_waiters.status', 'total_tables.table_no')->get();
 
         // echo "<pre>";
         // print_r($result);

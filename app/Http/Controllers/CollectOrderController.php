@@ -25,6 +25,7 @@ class CollectOrderController extends Controller
                 $result['all_item_attr'][$list1->id] = DB::table('items_attr')
                                                     ->leftJoin('sizes','items_attr.size_id','=','sizes.id')
                                                     ->leftJoin('types','items_attr.type_id','=','types.id')
+                                                    ->select('items_attr.id','items_attr.price','items_attr.attr_image','items_attr.type_id','items_attr.discount_type','items_attr.discount','items_attr.size_id','sizes.size_name','types.type_name')
                                                     ->where(['items_attr.item_id'=>$list1->id])
                                                     ->get();
             }
@@ -37,8 +38,9 @@ class CollectOrderController extends Controller
                       ->get();
 
         $result['cart']=DB::table('cart')
-                       // ->leftJoin('items', 'cart.items_id', '=', 'items.id')
-                       // ->leftJoin('items_attr', 'cart.items_attr_id', '=', 'items_attr.id')
+                       ->leftJoin('items', 'cart.items_id', '=', 'items.id')
+                       ->leftJoin('items_attr', 'cart.items_attr_id', '=', 'items_attr.id')
+                       ->select('cart.id', 'cart.table_id', 'cart.items_id', 'cart.items_attr_id', 'cart.qty', 'cart.rate', 'cart.total', 'cart.discount_val', 'cart.discount_type', 'cart.discount', 'cart.discount_total', 'cart.size_id', 'cart.flavor', 'cart.order_type', 'items.name')
                        ->get();
 
         // echo "<pre>";
@@ -66,6 +68,7 @@ class CollectOrderController extends Controller
                 $result['all_item_attr'][$list1->id] = DB::table('items_attr')
                                                     ->leftJoin('sizes','sizes.id','=','items_attr.size_id')
                                                     ->leftJoin('types','types.id','=','items_attr.type_id')
+                                                    ->select('items_attr.id','items_attr.price','items_attr.attr_image','items_attr.type_id','items_attr.discount_type','items_attr.discount','items_attr.size_id','sizes.size_name','types.type_name')
                                                     ->where(['items_attr.item_id'=>$list1->id])
                                                     ->get();
             }
@@ -103,7 +106,7 @@ class CollectOrderController extends Controller
                         <tbody>';
             if(isset($result['all_item'][$list->id][0])){
                 foreach($result['all_item'][$list->id] as $item_arr){
-                    foreach($result['all_item_attr'][$list1->id] as $all_item_arr){
+                    foreach($result['all_item_attr'][$item_arr->id] as $all_item_arr){
                         $loop_count_num++;
                         $dis = '';
                         if ($all_item_arr->discount_type == 'val'){
@@ -135,7 +138,7 @@ class CollectOrderController extends Controller
                                     <input type="hidden" id="discount_type_val'.$loop_count_num.'" value="'.$all_item_arr->discount_type.'">
                                 </td>
                                 <td>
-                                    <span>'.$all_item_arr->size_id.'</span>
+                                    <span>'.$all_item_arr->size_name.'</span>
                                     <input type="hidden" id="item_arr_size'.$loop_count_num.'" value="'.$all_item_arr->size_id.'">
                                 </td>
                                 <td>                                   
@@ -221,8 +224,9 @@ class CollectOrderController extends Controller
 
         $new_added_item=DB::table('cart')
                        ->where('cart.id', '=', $letest->id)
-                       // ->leftJoin('items', 'cart.items_id', '=', 'items.id')
-                       // ->leftJoin('items_attr', 'cart.items_attr_id', '=', 'items_attr.id')
+                       ->leftJoin('items', 'cart.items_id', '=', 'items.id')
+                       ->leftJoin('items_attr', 'cart.items_attr_id', '=', 'items_attr.id')
+                       ->select('cart.id', 'cart.table_id', 'cart.items_id', 'cart.items_attr_id', 'cart.qty', 'cart.rate', 'cart.total', 'cart.discount_val', 'cart.discount_type', 'cart.discount', 'cart.discount_total', 'cart.size_id', 'cart.flavor', 'cart.order_type', 'items.name')
                        ->get();
 
                        // echo "<pre>";
@@ -247,7 +251,7 @@ class CollectOrderController extends Controller
 
                             <td><a href="javascript:void(0)"><i class="fa fa-trash" style="color:black" onclick="delete_product('.$new_added_item[0]->id.')"></i></a></td>
 
-                            <td><a href="javascript:void(0)" id="item_name">'.$new_added_item[0]->items_id.'</a></td>
+                            <td><a href="javascript:void(0)" id="item_name">'.$new_added_item[0]->name.'</a></td>
 
                             <td><input type="number" id="item_qty_'.$new_added_item[0]->id.'" name="item_qty" value="'.$letest->qty.'" style="text-align: center; font-family: cursive; height: 50px; width: 40px; font-size: 25px;" onclick="update_qty('.$new_added_item[0]->id.')"></td>
 

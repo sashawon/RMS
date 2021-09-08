@@ -180,7 +180,7 @@ Route::group(['middleware'=>'customer_auth'],function(){
         session()->forget('TABLE_ID');
         session()->forget('TABLE_NO');
         session()->flash('msg','Logout Successfully');
-        return redirect('');
+        return redirect('/');
     });
 
     Route::get('/dashboard',[CustomerLoginController::class,'dashboard']);
@@ -207,16 +207,18 @@ Route::group(['middleware'=>'customer_auth'],function(){
 //Customer End
 
 //Waiter Start
+
 Route::get('/waiter/',[WaiterLoginController::class,'index']);
 Route::get('/waiter/login',[WaiterLoginController::class,'index']);
-Route::post('/waiter/auth',[WaiterLoginController::class,'auth'])->name('auth');
+Route::post('/waiter/auth',[WaiterLoginController::class,'auth'])->name('waiter.auth');
 
 Route::group(['middleware'=>'waiter_auth'],function(){
     Route::get('waiter/logout', function () {
         session()->forget('WAITER_LOGIN');
         session()->forget('WAITER_ID');
+        session()->forget('TABLE_ID');
         session()->flash('msg','Logout Successfully');
-        return redirect('');
+        return redirect('/waiter/');
     });
 
     Route::get('/waiter/dashboard',[WaiterLoginController::class,'dashboard']);

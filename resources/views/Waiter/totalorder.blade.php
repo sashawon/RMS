@@ -35,7 +35,7 @@
                         $i = 1;
                         @endphp
                         @foreach($placeOrder as $orders)
-                        @if($orders->status)
+                        @if($orders->status == "Ready")
                         <tr>
                             <td>{{$i++}}</td>
                             <td>{{$orders->token}}</td>

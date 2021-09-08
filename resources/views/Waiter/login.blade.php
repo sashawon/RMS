@@ -36,7 +36,7 @@
                             <!--<h2>{{Config::get('constants.site_name')}}</h2>-->
                         </div>
                         <div class="login-form">
-                            <form action="{{route('auth')}}" method="post">
+                            <form action="{{route('waiter.auth')}}" method="post">
                                 @csrf
                                 <div class="form-group">
                                     <label>Table User Details</label>

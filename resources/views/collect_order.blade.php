@@ -86,7 +86,7 @@
                                     <input type="hidden" id="discount_type_val{{$loop_count_num}}" value="{{$all_item_arr->discount_type}}">
                                 </td>
                                 <td>
-                                    <span>{{$all_item_arr->size_id}}</span>
+                                    <span>{{$all_item_arr->size_name}}</span>
                                     <input type="hidden" id="item_arr_size{{$loop_count_num}}" value="{{$all_item_arr->size_id}}">
                                 </td>
                                 <td>
@@ -180,7 +180,7 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="javascript:void(0)" id="item_name">{{$cart_data->items_id}}</a>
+                                    <a href="javascript:void(0)" id="item_name">{{$cart_data->name}}</a>
                                     <input type="hidden" name="item_name" value="{{$cart_data->id}}">
                                 </td>
                                 <td>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 07, 2021 at 06:08 PM
+-- Generation Time: Sep 08, 2021 at 11:28 AM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -72,7 +72,7 @@ INSERT INTO `categories` (`id`, `category_name`, `category_slug`, `parent_catego
 (2, 'Pizza', 'pizza', 0, 1, 1, '2021-08-23 12:12:16', '2021-08-23 12:12:16'),
 (3, 'Soup', 'soup', 0, 1, 1, '2021-08-23 12:12:43', '2021-08-23 12:12:43'),
 (4, 'Rice', 'rice', 0, 1, 1, '2021-08-23 12:12:58', '2021-08-23 12:13:24'),
-(5, 'Wings', 'wings', 0, 0, 1, '2021-08-23 12:13:16', '2021-08-23 12:13:28');
+(5, 'Wings', 'wings', 0, 1, 1, '2021-08-23 12:13:16', '2021-08-23 12:13:28');
 
 -- --------------------------------------------------------
 
@@ -91,16 +91,6 @@ CREATE TABLE `collect_orders` (
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `collect_orders`
---
-
-INSERT INTO `collect_orders` (`id`, `table_id`, `total`, `discount_total`, `payable_amount`, `token`, `status`, `created_at`, `updated_at`) VALUES
-(2, 1, 840, 768, 883, '1630757111399249364', 'Ready', '2021-09-04 12:05:11', '2021-09-04 12:05:11'),
-(3, 3, 1480, 1299, 1494, '1630834257286924822', 'Confirmed', '2021-09-05 09:30:57', '2021-09-05 09:30:57'),
-(4, 1, 1550, 1485, 1708, '1630994638778609895', 'Pending', '2021-09-07 06:03:58', '2021-09-07 06:03:58'),
-(5, 1, 1160, 999, 1149, '1630995488900389207', 'Pending', '2021-09-07 06:18:08', '2021-09-07 06:18:08');
 
 -- --------------------------------------------------------
 
@@ -128,21 +118,6 @@ CREATE TABLE `collect_orders_attr` (
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `collect_orders_attr`
---
-
-INSERT INTO `collect_orders_attr` (`id`, `table_id`, `items_id`, `items_attr_id`, `qty`, `rate`, `total`, `discount_val`, `discount_type`, `discount`, `discount_total`, `size_id`, `flavor`, `order_type`, `token`, `status`, `created_at`, `updated_at`) VALUES
-(4, 1, 1, 1, 2, 260, 520, 10, 'per', 52, 468, 1, 'Spicy', 'Heaving', '1630757111399249364', 'Ready', '2021-09-04 12:05:11', '2021-09-04 12:05:11'),
-(5, 1, 2, 1, 1, 320, 320, 20, 'val', 20, 300, 1, 'Extra Spicy', 'Parcel', '1630757111399249364', 'Ready', '2021-09-04 12:05:11', '2021-09-04 12:05:11'),
-(6, 1, 3, 1, 2, 450, 900, 15, 'per', 135, 765, 1, 'undefined', 'undefined', '1630834257286924822', 'Confirmed', '2021-09-05 09:30:57', '2021-09-05 09:30:57'),
-(7, 1, 1, 1, 1, 260, 260, 10, 'per', 26, 234, 1, 'Reguler', 'Heaving', '1630834257286924822', 'Confirmed', '2021-09-05 09:30:57', '2021-09-05 09:30:57'),
-(8, 1, 2, 1, 1, 320, 320, 20, 'val', 20, 300, 1, 'Reguler', 'Heaving', '1630834257286924822', 'Confirmed', '2021-09-05 09:30:57', '2021-09-05 09:30:57'),
-(9, 1, 3, 1, 1, 450, 450, 15, 'per', 15, 435, 1, 'Reguler', 'Heaving', '1630994638778609895', 'Pending', '2021-09-07 06:03:58', '2021-09-07 06:03:58'),
-(10, 1, 3, 3, 2, 550, 1100, 25, 'val', 50, 1050, 1, 'Spicy', 'Parcel', '1630994638778609895', 'Pending', '2021-09-07 06:03:58', '2021-09-07 06:03:58'),
-(11, 1, 1, 1, 1, 260, 260, 10, 'per', 26, 234, 1, 'Reguler', 'Heaving', '1630995488900389207', 'Pending', '2021-09-07 06:18:08', '2021-09-07 06:18:08'),
-(12, 1, 3, 1, 2, 450, 900, 15, 'per', 135, 765, 1, 'Reguler', 'Heaving', '1630995488900389207', 'Pending', '2021-09-07 06:18:08', '2021-09-07 06:18:08');
 
 -- --------------------------------------------------------
 
@@ -185,13 +160,6 @@ CREATE TABLE `coupons` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `coupons`
---
-
-INSERT INTO `coupons` (`id`, `title`, `code`, `value`, `type`, `min_ord_amt`, `is_one_time`, `status`, `created_at`, `updated_at`) VALUES
-(2, 'Shawon1001', 'Shawon1001', '25', 'value', 500, 1, 1, '2021-08-28 22:44:03', '2021-08-28 22:44:03');
-
 -- --------------------------------------------------------
 
 --
@@ -217,10 +185,12 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`id`, `name`, `slug`, `category_id`, `image`, `component`, `notes`, `desc`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Chicken Chess', 'chickenchess', '1', '1629742951.jpg', '<p>Bun, pan fried, grilled, smoked or flame broiled, cheese, lettuce, tomato, onion, pickles, bacon, or chiles; condiments such as ketchup, mustard, mayonnaise, relish.</p>', '<p>Some of these will even work for turkey or veggie burgers! Burger Captions. life is too short to miss out on double cheeseburgers; i&#39;m into fitness&hellip;fitness ...</p>', '<p>A hamburger (also burger for short) is a food, typically considered a sandwich, consisting of one or more cooked patties of ground meat, usually beef, placed inside a sliced bread roll or bun. The patty may be pan fried, grilled, smoked or flame broiled. Hamburgers are often served with cheese, lettuce, tomato, onion, pickles, bacon, or chiles; condiments such as ketchup, mustard, mayonnaise, relish, or a &quot;special sauce&quot;, often a variation of Thousand Island dressing; and are frequently placed on sesame seed buns. A hamburger topped with cheese is called a cheeseburger.</p>', 1, '2021-08-23 12:22:31', '2021-08-23 12:22:31'),
-(2, 'Beef Chess', 'beefchess', '1', '1629743081.jpg', '<p>Bun, pan fried, grilled, smoked or flame broiled, cheese, lettuce, tomato, onion, pickles, bacon, or chiles; condiments such as ketchup, mustard, mayonnaise, relish.</p>', '<p>Some of these will even work for turkey or veggie burgers! Burger Captions. life is too short to miss out on double cheeseburgers; i&#39;m into fitness&hellip;fitness ...</p>', '<p>A hamburger (also burger for short) is a food, typically considered a sandwich, consisting of one or more cooked patties of ground meat, usually beef, placed inside a sliced bread roll or bun. The patty may be pan fried, grilled, smoked or flame broiled. Hamburgers are often served with cheese, lettuce, tomato, onion, pickles, bacon, or chiles; condiments such as ketchup, mustard, mayonnaise, relish, or a &quot;special sauce&quot;, often a variation of Thousand Island dressing; and are frequently placed on sesame seed buns. A hamburger topped with cheese is called a cheeseburger.</p>', 1, '2021-08-23 12:24:41', '2021-08-23 12:24:41'),
-(3, 'Cheese Pizza', 'cheesepizza', '2', '1629743454.jpg', '<p>combination of olive oil, oregano, tomato, olives, mozzarella or other cheese, and many other ingredients, baked quickly</p>', '<p>Pizza, dish of Italian origin consisting of a flattened disk of bread dough topped with some combination of olive oil, oregano, tomato, olives, mozzarella or other cheese, and many other ingredients, baked quickly</p>', '<p>Pizza, dish of Italian origin consisting of a flattened disk of bread dough topped with some combination of olive oil, oregano, tomato, olives, mozzarella or other cheese, and many other ingredients, baked quickly&mdash;usually, in a commercial setting, using a wood-fired oven heated to a very high temperature&mdash;and served hot.</p>\r\n\r\n<p>One of the simplest and most traditional pizzas is the Margherita, which is topped with tomatoes or tomato sauce, mozzarella, and basil. Popular legend relates that it was named for Queen Margherita, wife of Umberto I, who was said to have liked its mild fresh flavour and to have also noted that its topping colours&mdash;green, white, and red&mdash;were those of the Italian flag.</p>', 1, '2021-08-23 12:30:54', '2021-08-23 12:30:54'),
-(7, 'Fried Rice', 'fried_rice', '4', '1630390813.jpg', '<p>What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?</p>', '<p>What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?</p>', '<p>What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?</p>', 1, '2021-08-31 00:20:13', '2021-08-31 00:20:13');
+(1, 'Chicken Burger', 'ChickenBurger', '1', '1631090517.jpg', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 1, '2021-09-08 02:41:58', '2021-09-08 02:41:58'),
+(2, 'Beef Burger', 'BeefBurger', '1', '1631090695.jpg', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 1, '2021-09-08 02:44:55', '2021-09-08 02:44:55'),
+(3, 'LikeMeat Pizza', 'LikeMeatPizza', '2', '1631090926.jpg', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 1, '2021-09-08 02:48:46', '2021-09-08 02:48:46'),
+(4, 'Sicilian Pizza', 'SicilianPizza', '2', '1631091072.jpg', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 1, '2021-09-08 02:51:12', '2021-09-08 02:51:12'),
+(5, 'Shrimp Fried Rice', 'ShrimpFriedRice', '4', '1631091221.jpg', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 1, '2021-09-08 02:53:41', '2021-09-08 02:53:41'),
+(6, 'Chicken Fried Rice', 'ChickenFriedRice', '4', '1631091269.jpg', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 1, '2021-09-08 02:54:29', '2021-09-08 02:54:29');
 
 -- --------------------------------------------------------
 
@@ -245,12 +215,16 @@ CREATE TABLE `items_attr` (
 --
 
 INSERT INTO `items_attr` (`id`, `item_id`, `sku`, `price`, `type_id`, `discount`, `discount_type`, `size_id`, `attr_image`) VALUES
-(1, 1, 'BURGER001', 260, 1, 10, 'per', 1, '1629742951837728409.jpg'),
-(2, 2, 'BURGER002', 320, 1, 20, 'val', 1, '1629743081809018224.jpg'),
-(3, 3, 'PIZZA001', 450, 1, 15, 'per', 1, '1629743454704178011.jpg'),
-(4, 3, 'PIZZA002', 550, 3, 25, 'val', 1, '1629743454910521424.jpg'),
-(5, 7, 'FriedRice001', 440, 1, 30, 'val', 1, '1629743545682381796.jpg'),
-(6, 7, 'FriedRice002', 700, 3, 35, 'per', 1, '1629743545663450282.jpg');
+(1, 1, 'BURGER001', 320, 1, 20, 'val', 1, '1631090518654577929.jpg'),
+(2, 1, 'BURGER002', 300, 1, 10, 'per', 1, '1631090518966196869.jpg'),
+(3, 1, 'BURGER003', 280, 1, 0, 'val', 1, '1631090518320542797.jpg'),
+(4, 2, 'BURGER004', 450, 1, 50, 'val', 1, '1631090695280228453.jpg'),
+(5, 3, 'PIZZA001', 450, 1, 0, 'val', 2, '1631090926254766357.jpg'),
+(6, 3, 'PIZZA002', 500, 1, 0, 'val', 3, '1631090926281404265.jpg'),
+(7, 3, 'PIZZA003', 550, 1, 10, 'val', 5, '1631090926834515833.jpg'),
+(8, 4, 'PIZZA004', 600, 1, 5, 'per', 5, '1631091073315099137.jpg'),
+(9, 5, 'RICE001', 180, 1, 0, 'val', 1, '1631091221393249845.jpg'),
+(10, 6, 'RICE002', 240, 1, 20, 'val', 1, '1631091269486984177.jpg');
 
 -- --------------------------------------------------------
 
@@ -349,10 +323,9 @@ CREATE TABLE `total_tables` (
 --
 
 INSERT INTO `total_tables` (`id`, `table_no`, `table_users`, `password`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 'table1', '1234', 1, '2021-08-25 06:00:36', '2021-08-25 06:12:21'),
-(3, 2, 'table2', '1234', 1, '2021-08-28 03:56:11', '2021-08-28 03:56:11'),
-(4, 4, 'table4', '12345', 1, '2021-08-28 03:56:25', '2021-09-07 03:46:27'),
-(5, 5, 'Table5', '1234', 1, '2021-09-07 04:18:55', '2021-09-07 04:18:55');
+(1, 1, 'table1', '1234', 1, '2021-09-08 01:19:35', '2021-09-08 01:19:35'),
+(2, 2, 'table2', '1234', 1, '2021-09-08 01:19:50', '2021-09-08 01:19:58'),
+(3, 3, 'table3', '1234', 1, '2021-09-08 01:20:39', '2021-09-08 01:20:39');
 
 -- --------------------------------------------------------
 
@@ -376,9 +349,9 @@ CREATE TABLE `total_waiters` (
 --
 
 INSERT INTO `total_waiters` (`id`, `name`, `table_id`, `username`, `password`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'SA SHAWON', 1, 'SA SHAWON', '1234', 1, '2021-09-07 04:16:40', '2021-09-07 04:18:22'),
-(2, 'Ashik', 3, 'ashik', '1234', 1, '2021-09-07 04:17:28', '2021-09-07 04:17:28'),
-(3, 'Rakib Bro', 4, 'rakibbro', '1234', 1, '2021-09-07 04:18:02', '2021-09-07 04:21:30');
+(1, 'admin', 1, 'admin', '1234', 1, '2021-09-08 01:22:56', '2021-09-08 01:22:56'),
+(2, 'admin2', 2, 'admin2', '1234', 1, '2021-09-08 01:23:20', '2021-09-08 01:52:02'),
+(3, 'admin3', 3, 'admin3', '1234', 1, '2021-09-08 01:52:55', '2021-09-08 01:52:55');
 
 -- --------------------------------------------------------
 
@@ -401,7 +374,7 @@ CREATE TABLE `types` (
 
 INSERT INTO `types` (`id`, `type_name`, `is_home`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'Regular', 1, 1, '2021-08-23 12:16:05', '2021-08-23 12:16:05'),
-(2, 'Offered', 0, 1, '2021-08-23 12:16:11', '2021-08-23 12:16:11'),
+(2, 'Offered', 1, 1, '2021-08-23 12:16:11', '2021-08-23 12:16:11'),
 (3, 'Special', 1, 1, '2021-08-23 12:16:21', '2021-08-23 12:16:21');
 
 -- --------------------------------------------------------
@@ -528,7 +501,7 @@ ALTER TABLE `vats`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -540,13 +513,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `collect_orders`
 --
 ALTER TABLE `collect_orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `collect_orders_attr`
 --
 ALTER TABLE `collect_orders_attr`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `counter_logins`
@@ -558,13 +531,13 @@ ALTER TABLE `counter_logins`
 -- AUTO_INCREMENT for table `coupons`
 --
 ALTER TABLE `coupons`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `items_attr`
@@ -594,7 +567,7 @@ ALTER TABLE `sizes`
 -- AUTO_INCREMENT for table `total_tables`
 --
 ALTER TABLE `total_tables`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `total_waiters`

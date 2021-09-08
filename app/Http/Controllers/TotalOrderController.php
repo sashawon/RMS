@@ -9,15 +9,12 @@ use Storage;
 
 class TotalOrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $result['placeOrder']=DB::table('collect_orders')
-                            ->join('total_tables', 'collect_orders.table_id', '=', 'total_tables.id')
+                            ->leftjoin('total_tables', 'collect_orders.table_id', '=', 'total_tables.id')
+                            ->select('collect_orders.id','collect_orders.token','total_tables.table_no','collect_orders.created_at','collect_orders.status')
+                            ->orderByDesc('collect_orders.id')
                             ->get();
 
         return view('counter/totalorder',$result);
@@ -25,20 +22,32 @@ class TotalOrderController extends Controller
 
     public function orderDetails(Request $request, $id)
     {
-        $result['placeOrderDetalis']=DB::table('collect_orders_attr')->where('token','=',$id)->get();
-        $placeOrder=DB::table('collect_orders')->where('token','=',$id)->get();
+        $result['placeOrderDetalis']=DB::table('collect_orders_attr')
+                                    ->leftjoin('items', 'collect_orders_attr.items_id', '=', 'items.id')
+                                    ->leftjoin('total_tables', 'collect_orders_attr.table_id', '=', 'total_tables.id')
+                                    ->leftJoin('sizes','collect_orders_attr.size_id','=','sizes.id')
+                                    // ->leftJoin('types','collect_orders_attr.type_id','=','types.id')
+                                    ->select('collect_orders_attr.id', 'collect_orders_attr.table_id', 'collect_orders_attr.items_id', 'collect_orders_attr.items_attr_id', 'collect_orders_attr.qty', 'collect_orders_attr.rate', 'collect_orders_attr.total', 'collect_orders_attr.discount_val', 'collect_orders_attr.discount_type', 'collect_orders_attr.discount', 'collect_orders_attr.discount_total', 'collect_orders_attr.size_id', 'collect_orders_attr.flavor', 'collect_orders_attr.order_type', 'collect_orders_attr.token', 'collect_orders_attr.status', 'items.name', 'sizes.size_name')
+                                    ->where('token','=',$id)
+                                    ->get();
+
+        $placeOrder=DB::table('collect_orders')
+                    ->where('token','=',$id)
+                    ->get();
+
+        // echo "<pre>"; print_r($result); die();
 
         echo $response = '<table class="table"><tr><td><b>Table No: </b></td><td>'.$placeOrder[0]->table_id.'</td></tr><tr><td><b>Token: </b></td><td>'.$placeOrder[0]->token.'</td></tr><tr><td><b>Order Time: </b></td><td>'.$placeOrder[0]->created_at.'</td></tr><tr><td><b>Status: </b></td><td>'.$placeOrder[0]->status.'</td></tr></table>';
 
-        echo $response = '<table class="table table-bordered table-striped"><thead><tr><th>ID</th><th>Items Name</th><th>QTY</th><th>Size</th><th>Flavor</th><th>Rate</th><th>Total</th><th>Discount Total</th><th>Order Type</th></tr></thead><tbody>';
+        echo $response = '<table class="table table-bordered table-striped"><thead><tr><th>No</th><th>Items Name</th><th>QTY</th><th>Size</th><th>Flavor</th><th>Rate</th><th>Total</th><th>Discount Total</th><th>Order Type</th></tr></thead><tbody>';
         $i = '1';
         $grandTotal = 0;
         foreach ($result['placeOrderDetalis'] as $ordervalue) {
             echo $response = '<tr>
                 <td>'.$i++.'</td>
-                <td>'.$ordervalue->items_id.'</td>
+                <td>'.$ordervalue->name.'</td>
                 <td>'.$ordervalue->qty.'</td>
-                <td>'.$ordervalue->size_id.'</td>
+                <td>'.$ordervalue->size_name.'</td>
                 <td>'.$ordervalue->flavor.'</td>
                 <td>'.$ordervalue->rate.'</td>
                 <td>'.$ordervalue->total.'</td>
@@ -77,8 +86,10 @@ class TotalOrderController extends Controller
         
         $table_no = $_POST['table_no'];
         $order_id = $_POST['order_id'];
+        $order_token = $_POST['order_token'];
 
         DB::table('collect_orders')->where('id','=',$order_id)->update(['table_id'=>$table_no]);
+        DB::table('collect_orders_attr')->where('token','=',$order_token)->update(['table_id'=>$table_no]);
 
         $msg = 'Table Update Successfully';
         session()->flash('msg',$msg);

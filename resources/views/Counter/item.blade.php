@@ -27,7 +27,6 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Slug</th>
                             <th>SKU</th>
                             <th>Image</th>
                             <th>Action</th>
@@ -39,7 +38,6 @@
                             <td>{{$list->id}}</td>
                             <td>{{$list->name}}</td>
                             <td>{{$list->slug}}</td>
-                            <td>{{$list->sku}}</td>
                             <td>
                                 @if($list->image!='')
                                     <img src="{{asset('storage/item/'.$list->image)}}" width="100px" alt="Item Image">

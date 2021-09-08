@@ -34,6 +34,7 @@ class WaiterLoginController extends Controller
             if ($password==$result->password) {
                 $request->session()->put('WAITER_LOGIN',true);
                 $request->session()->put('WAITER_ID',$result->id);
+                $request->session()->put('TABLE_ID',$result->table_id);
                 return redirect('/waiter/dashboard');
             } else {
                 $request->session()->flash('msg','Please enter Correct password');

@@ -21,8 +21,8 @@ class CustomerLoginController extends Controller
 
     public function auth(Request $request)
     {
-        echo $username = $request->post('username');
-        echo $password = $request->post('password');
+        $username = $request->post('username');
+        $password = $request->post('password');
 
 
         //$result = TotalTable::where(['username'=>$username,'password'=>$password])->get();

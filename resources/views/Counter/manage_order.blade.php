@@ -43,6 +43,7 @@
                             </button>
                         </div>
                         <input type="hidden" name="order_id" value="{{$order_data[0]->id}}">
+                        <input type="hidden" name="order_token" value="{{$order_data[0]->token}}">
                     </form>
                 </div>
             </div>

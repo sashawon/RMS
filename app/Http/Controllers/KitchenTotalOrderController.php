@@ -11,7 +11,8 @@ class KitchenTotalOrderController extends Controller
     public function index()
     {
         $result['placeOrder']=DB::table('collect_orders')
-                            ->join('total_tables', 'collect_orders.table_id', '=', 'total_tables.id')
+                            ->leftjoin('total_tables', 'collect_orders.table_id', '=', 'total_tables.id')
+                            ->select('collect_orders.id','collect_orders.token','total_tables.table_no','collect_orders.created_at','collect_orders.status')
                             ->get();
 
         return view('kitchen/totalorder',$result);
@@ -19,8 +20,18 @@ class KitchenTotalOrderController extends Controller
 
     public function orderDetails(Request $request, $id)
     {
-        $result['placeOrderDetalis']=DB::table('collect_orders_attr')->where('token','=',$id)->get();
-        $placeOrder=DB::table('collect_orders')->where('token','=',$id)->get();
+        $result['placeOrderDetalis']=DB::table('collect_orders_attr')
+                                    ->leftjoin('items', 'collect_orders_attr.items_id', '=', 'items.id')
+                                    ->leftjoin('total_tables', 'collect_orders_attr.table_id', '=', 'total_tables.id')
+                                    ->leftJoin('sizes','collect_orders_attr.size_id','=','sizes.id')
+                                    // ->leftJoin('types','collect_orders_attr.type_id','=','types.id')
+                                    ->select('collect_orders_attr.id', 'collect_orders_attr.table_id', 'collect_orders_attr.items_id', 'collect_orders_attr.items_attr_id', 'collect_orders_attr.qty', 'collect_orders_attr.rate', 'collect_orders_attr.total', 'collect_orders_attr.discount_val', 'collect_orders_attr.discount_type', 'collect_orders_attr.discount', 'collect_orders_attr.discount_total', 'collect_orders_attr.size_id', 'collect_orders_attr.flavor', 'collect_orders_attr.order_type', 'collect_orders_attr.token', 'collect_orders_attr.status', 'items.name', 'sizes.size_name')
+                                    ->where('token','=',$id)
+                                    ->get();
+        
+        $placeOrder=DB::table('collect_orders')
+                    ->where('token','=',$id)
+                    ->get();
 
         echo $response = '<table class="table"><tr><td><b>Table No: </b></td><td>'.$placeOrder[0]->table_id.'</td></tr><tr><td><b>Token: </b></td><td>'.$placeOrder[0]->token.'</td></tr><tr><td><b>Order Time: </b></td><td>'.$placeOrder[0]->created_at.'</td></tr><tr><td><b>Status: </b></td><td>'.$placeOrder[0]->status.'</td></tr></table>';
 
@@ -30,9 +41,9 @@ class KitchenTotalOrderController extends Controller
         foreach ($result['placeOrderDetalis'] as $ordervalue) {
             echo $response = '<tr>
                 <td>'.$i++.'</td>
-                <td>'.$ordervalue->items_id.'</td>
+                <td>'.$ordervalue->name.'</td>
                 <td>'.$ordervalue->qty.'</td>
-                <td>'.$ordervalue->size_id.'</td>
+                <td>'.$ordervalue->size_name.'</td>
                 <td>'.$ordervalue->flavor.'</td>
                 <td>'.$ordervalue->rate.'</td>
                 <td>'.$ordervalue->total.'</td>

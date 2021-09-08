@@ -30,7 +30,7 @@
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
-                                    <label for="table_no" class="control-label mb-1">Category</label>
+                                    <label for="table_no" class="control-label mb-1">Table No</label>
                                     <select name="table_no" id="table_no" class="form-control" required="">
                                             @foreach($table as $list)
                                                 @if($id==$list->id)

@@ -10,11 +10,17 @@ class WaiterTotalOrderController extends Controller
 {
     public function index()
     {
+        $TABLE_ID = session('TABLE_ID');
         $result['placeOrder']=DB::table('collect_orders')
-                            ->join('total_waiters', 'collect_orders.table_id', '=', 'total_waiters.table_id')
-                            ->join('total_tables', 'collect_orders.table_id', '=', 'total_tables.id')
-                            ->where('collect_orders.table_id', '=', 'total_tables.id')
+                            ->leftjoin('total_waiters', 'collect_orders.table_id', '=', 'total_waiters.table_id')
+                            ->leftjoin('total_tables', 'collect_orders.table_id', '=', 'total_tables.id')
+                            ->select('collect_orders.id','collect_orders.token','total_tables.table_no','collect_orders.created_at','collect_orders.status')
+                            ->where('collect_orders.table_id', '=', $TABLE_ID)
                             ->get();
+
+        // echo"<pre>";
+        // print_r($result);
+        // die();
 
         return view('waiter/totalorder',$result);
     }
